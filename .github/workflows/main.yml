@@ -84,13 +84,14 @@ jobs:
         shell: pwsh
         run: |
           $diff = git diff --name-only HEAD^ HEAD
+          echo "diff $diff"
 
           $PackageName = "${{ matrix.package_name }}"
           $PackageFolderName = $PackageName.replace("@angulartist/","")
 
           # Check if a file under packages/path/to/package has changed (added, modified, deleted)
           $SourceDiff = $diff | Where-Object { $_ -match "^packages/$PackageFolderName/" }
-          echo "source diff $SourceDiff"
+          echo "source diff $SourceDiff.Length"
           $HasDiff = $SourceDiff.Length -gt 0
           echo "has diff $HasDiff"
 
