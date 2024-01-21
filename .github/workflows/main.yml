@@ -83,7 +83,7 @@ jobs:
         id: check_diff
         shell: pwsh
         run: |
-          $diff = git diff --name-only HEAD^ HEAD
+          $diff = git diff --name-only main..HEAD
           echo "diff $diff"
 
           $PackageName = "${{ matrix.package_name }}"
@@ -144,7 +144,7 @@ jobs:
         id: check_diff
         shell: pwsh
         run: |
-          $diff = git diff --name-only HEAD^ HEAD
+          $diff = git diff --name-only main..HEAD
 
           $PackageName = "${{ matrix.package_name }}"
           $PackageFolderName = $PackageName.replace("@angulartist/","")
