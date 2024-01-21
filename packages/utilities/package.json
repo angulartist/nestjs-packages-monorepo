@@ -1,0 +1,63 @@
+{
+  "name": "@angulartist/utilities",
+  "version": "1.2.13",
+  "description": "",
+  "author": "",
+  "license": "UNLICENSED",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist/"
+  ],
+  "engines": {
+    "node": ">=16.14"
+  },
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "yarn prebuild && nest build -c tsconfig.build.json",
+    "lint": "eslint src/.",
+    "lint:fix": "eslint src/. --fix",
+    "exec:jest": "jest --detectOpenHandles",
+    "test": "yarn run exec:jest",
+    "test:coverage": "yarn run exec:jest --coverage",
+    "exec:release:version": "yarn standard-version",
+    "release:version": "yarn exec:release:version",
+    "release:publish": "yarn npm publish --access public",
+    "alpharelease:version": "yarn exec:release:version --skip.changelog --skip.tag",
+    "alpharelease:publish": "yarn npm publish --access public --tag next"
+  },
+  "peerDependencies": {
+    "@nestjs/common": ">=8.4.4",
+    "@nestjs/core": ">=8.4.4",
+    "class-transformer": ">=0.5.1",
+    "reflect-metadata": ">=0.1.13",
+    "rxjs": ">=7.5.5"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "8.2.5",
+    "@nestjs/common": "8.4.4",
+    "@nestjs/schematics": "8.0.10",
+    "@nestjs/testing": "8.4.4",
+    "@types/express": "4.17.13",
+    "@types/jest": "28.1.5",
+    "@types/node": "20.11.5",
+    "@types/supertest": "2.0.11",
+    "class-transformer": "0.5.1",
+    "class-validator": "0.14.1",
+    "eslint": "8.17.0",
+    "jest": "28.1.3",
+    "jest-mock": "28.1.3",
+    "reflect-metadata": "0.2.1",
+    "rimraf": "3.0.2",
+    "source-map-support": "0.5.21",
+    "standard-version": "9.5.0",
+    "ts-jest": "28.0.6",
+    "ts-loader": "9.2.8",
+    "ts-node": "10.7.0",
+    "typescript": "4.6.2"
+  },
+  "imports": {
+    "$/*": "src/*",
+    "#/*": "test/*"
+  }
+}

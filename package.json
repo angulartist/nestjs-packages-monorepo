@@ -1,0 +1,40 @@
+{
+  "name": "nestjs-packages-monorepo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=18.19.0"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "workspaces:foreach": "yarn workspaces foreach --all --parallel --exclude nestjs-packages-monorepo --jobs 4 --verbose",
+    "test:packages": "yarn workspaces:foreach run test",
+    "test:coverage:packages": "yarn workspaces:foreach run test:coverage",
+    "test:ci:packages": "yarn workspaces:foreach run test:coverage --silent --runInBand --ci --color",
+    "build:packages": "yarn workspaces:foreach run build",
+    "lint:packages": "yarn workspaces:foreach run lint",
+    "postinstall": "husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "16.2.3",
+    "@commitlint/config-conventional": "16.2.1",
+    "@typescript-eslint/eslint-plugin": "5.15.0",
+    "@typescript-eslint/parser": "5.15.0",
+    "eslint": "8.11.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-prettier": "4.0.0",
+    "eslint-plugin-unused-imports": "2.0.0",
+    "husky": "7.0.4",
+    "prettier": "2.6.0",
+    "semantic-release": "19.0.2",
+    "standard-version": "9.5.0"
+  },
+  "packageManager": "yarn@4.0.2"
+}
