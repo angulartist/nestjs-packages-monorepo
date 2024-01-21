@@ -155,8 +155,10 @@ jobs:
           echo "package_changed=$HasDiff" >> $env:GITHUB_OUTPUT
       - name: Setup NodeJS
         uses: ./.actions/node-setup
+        if: steps.check_diff.package_changed == 'True'
       - name: Download build artifacts
         uses: actions/download-artifact@v4
+        if: steps.check_diff.package_changed == 'True'
         with:
           name: build-artifacts
       - name: Setup GIT config
