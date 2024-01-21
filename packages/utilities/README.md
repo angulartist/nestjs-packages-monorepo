@@ -1,3 +1,3 @@
 # NestJS Packages Monorepo Example
 
-Utils
+Utilities
