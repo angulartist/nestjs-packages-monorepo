@@ -1,6 +1,6 @@
 # Nestjs Packages Monorepo Example with Yarn Workspaces and Github Actions
 
-Example
+Nestjs Packages Monorepo Example with Yarn Workspaces and Github Actions 
 
 ## Contributing
 
