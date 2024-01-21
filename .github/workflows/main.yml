@@ -78,7 +78,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
       - name: Assert package files have changed
         id: check_diff
         shell: pwsh
@@ -137,7 +137,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 0
       - name: Assert package files have changed
         id: check_diff
         shell: pwsh
