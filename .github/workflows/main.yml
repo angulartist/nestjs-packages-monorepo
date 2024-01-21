@@ -77,8 +77,6 @@ jobs:
     if: ${{ (github.ref != 'refs/heads/main') }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
       - name: Assert package files have changed
         id: check_diff
         shell: pwsh
