@@ -83,7 +83,7 @@ jobs:
         id: check_diff
         shell: pwsh
         run: |
-          $diff = git diff --name-only HEAD^..HEAD
+          $diff = git diff --name-only origin/main..HEAD
           echo "git diff main..current: $diff"
 
           $PackageName = "${{ matrix.package_name }}"
@@ -136,11 +136,13 @@ jobs:
     if: ${{ (github.ref == 'refs/heads/main') }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - name: Assert package files have changed
         id: check_diff
         shell: pwsh
         run: |
-          $diff = git diff --name-only main..HEAD
+          $diff = git diff --name-only origin/main..HEAD
           echo "git diff main..current: $diff"
 
           $PackageName = "${{ matrix.package_name }}"
