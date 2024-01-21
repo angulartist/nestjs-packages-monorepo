@@ -81,12 +81,6 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 2
-      - name: Setup NodeJS
-        uses: ./.actions/node-setup
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: build-artifacts
       - name: Assert package files have changed
         id: check_diff
         shell: pwsh
@@ -101,6 +95,14 @@ jobs:
           $HasDiff = $SourceDiff.Length -gt 0
 
           echo "package_changed=$HasDiff" >> $env:GITHUB_OUTPUT
+      - name: Setup NodeJS
+        if: steps.check_diff.package_changed == 'True'
+        uses: ./.actions/node-setup
+      - name: Download build artifacts
+        if: steps.check_diff.package_changed == 'True'
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
       - name: Setup GIT config
         if: steps.check_diff.package_changed == 'True'
         run: |
@@ -135,12 +137,8 @@ jobs:
     if: ${{ (github.ref == 'refs/heads/main') }}
     steps:
       - uses: actions/checkout@v4
-      - name: Setup NodeJS
-        uses: ./.actions/node-setup
-      - name: Download build artifacts
-        uses: actions/download-artifact@v4
         with:
-          name: build-artifacts
+          fetch-depth: 2
       - name: Assert package files have changed
         id: check_diff
         shell: pwsh
@@ -155,6 +153,12 @@ jobs:
           $HasDiff = $SourceDiff.Length -gt 0
 
           echo "package_changed=$HasDiff" >> $env:GITHUB_OUTPUT
+      - name: Setup NodeJS
+        uses: ./.actions/node-setup
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
       - name: Setup GIT config
         if: steps.check_diff.package_changed == 'True'
         run: |
