@@ -97,15 +97,15 @@ jobs:
 
           echo "package_changed=$HasDiff" >> $env:GITHUB_OUTPUT
       - name: Setup NodeJS
-        if: steps.check_diff.package_changed == 'True'
+        if: steps.check_diff.outputs.package_changed == 'True'
         uses: ./.actions/node-setup
       - name: Download build artifacts
-        if: steps.check_diff.package_changed == 'True'
+        if: steps.check_diff.outputs.package_changed == 'True'
         uses: actions/download-artifact@v4
         with:
           name: build-artifacts
       - name: Setup GIT config
-        if: steps.check_diff.package_changed == 'True'
+        if: steps.check_diff.outputs.package_changed == 'True'
         run: |
           echo "Setup GIT global config"
           git config --global user.email $ORG_EMAIL
@@ -115,13 +115,13 @@ jobs:
         env:
           ORG_EMAIL: ${{ vars.ORG_EMAIL }}
       - name: Get CI commit short SHA
-        if: steps.check_diff.package_changed == 'True'
+        if: steps.check_diff.outputs.package_changed == 'True'
         uses: benjlevesque/short-sha@v2.2
         id: short-sha
         with:
           length: 6
       - name: Release - Prerelease package
-        if: steps.check_diff.package_changed == 'True'
+        if: steps.check_diff.outputs.package_changed == 'True'
         run: |
           yarn workspace ${{ matrix.package_name }} run release:version --prerelease next-$CI_COMMIT_SHORT_SHA
           yarn workspace ${{ matrix.package_name }} run release:publish
@@ -157,14 +157,14 @@ jobs:
           echo "package_changed=$HasDiff" >> $env:GITHUB_OUTPUT
       - name: Setup NodeJS
         uses: ./.actions/node-setup
-        if: steps.check_diff.package_changed == 'True'
+        if: steps.check_diff.outputs.package_changed == 'True'
       - name: Download build artifacts
         uses: actions/download-artifact@v4
-        if: steps.check_diff.package_changed == 'True'
+        if: steps.check_diff.outputs.package_changed == 'True'
         with:
           name: build-artifacts
       - name: Setup GIT config
-        if: steps.check_diff.package_changed == 'True'
+        if: steps.check_diff.outputs.package_changed == 'True'
         run: |
           echo "Setup GIT global config"
           git config --global user.email $ORG_EMAIL
@@ -174,13 +174,13 @@ jobs:
         env:
           ORG_EMAIL: ${{ vars.ORG_EMAIL }}
       - name: Release - Tag package
-        if: steps.check_diff.package_changed == 'True'
+        if: steps.check_diff.outputs.package_changed == 'True'
         run: |
           yarn workspace ${{ matrix.package_name }} run release:version
 
           git push --follow-tags origin main
       - name: Release - Publish package
-        if: steps.check_diff.package_changed == 'True'
+        if: steps.check_diff.outputs.package_changed == 'True'
         run: |
           yarn workspace ${{ matrix.package_name }} run release:publish
         env:
