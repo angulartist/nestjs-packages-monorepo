@@ -90,8 +90,10 @@ jobs:
           $PackageFolderName = $PackageName.replace("@angulartist/","")
 
           # Check if a file under packages/path/to/package has changed (added, modified, deleted)
+          echo "sourcing path ^packages/$PackageFolderName/"
           $SourceDiff = $diff | Where-Object { $_ -match "^packages/$PackageFolderName/" }
           $HasDiff = $SourceDiff.Length -gt 0
+          echo "has diff $HasDiff"
 
           echo "package_changed=$HasDiff" >> $env:GITHUB_OUTPUT
       - name: Setup NodeJS
