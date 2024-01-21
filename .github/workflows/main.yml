@@ -77,21 +77,21 @@ jobs:
     if: ${{ (github.ref != 'refs/heads/main') }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
       - name: Assert package files have changed
         id: check_diff
         shell: pwsh
         run: |
-          $diff = git diff --name-only main..HEAD
-          echo "diff $diff"
+          $diff = git diff --name-only HEAD^..HEAD
+          echo "git diff main..current: $diff"
 
           $PackageName = "${{ matrix.package_name }}"
           $PackageFolderName = $PackageName.replace("@angulartist/","")
 
           # Check if a file under packages/path/to/package has changed (added, modified, deleted)
           $SourceDiff = $diff | Where-Object { $_ -match "^packages/$PackageFolderName/" }
-          echo "source diff $SourceDiff.Length"
           $HasDiff = $SourceDiff.Length -gt 0
-          echo "has diff $HasDiff"
 
           echo "package_changed=$HasDiff" >> $env:GITHUB_OUTPUT
       - name: Setup NodeJS
@@ -136,13 +136,12 @@ jobs:
     if: ${{ (github.ref == 'refs/heads/main') }}
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
       - name: Assert package files have changed
         id: check_diff
         shell: pwsh
         run: |
           $diff = git diff --name-only main..HEAD
+          echo "git diff main..current: $diff"
 
           $PackageName = "${{ matrix.package_name }}"
           $PackageFolderName = $PackageName.replace("@angulartist/","")
