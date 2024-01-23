@@ -14,7 +14,7 @@ jobs:
       - name: Stringify packages to $GITHUB_OUTPUT
         id: ref
         run: |
-          echo "packages={\"names\":[\"@angulartist/utilities\"]}" >> $GITHUB_OUTPUT
+          echo "packages={\"names\":[\"@angulartist/utilities\",\"@angulartist/emails-sender\"]}" >> $GITHUB_OUTPUT
 
   build:
     runs-on: ubuntu-latest
