@@ -1,4 +1,4 @@
-import { IEmailsSenderConfig } from '$/interfaces/emails-sender-config.interface';
+import { IEmailsSenderConfig } from './interfaces/emails-sender-config.interface';
 
 export class EmailsSender {
   constructor(private config: IEmailsSenderConfig) {
