@@ -102,6 +102,40 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@angulartist/emails-sender@workspace:packages/emails-sender":
+  version: 0.0.0-use.local
+  resolution: "@angulartist/emails-sender@workspace:packages/emails-sender"
+  dependencies:
+    "@nestjs/cli": "npm:8.2.5"
+    "@nestjs/common": "npm:8.4.4"
+    "@nestjs/schematics": "npm:8.0.10"
+    "@nestjs/testing": "npm:8.4.4"
+    "@types/express": "npm:4.17.13"
+    "@types/jest": "npm:28.1.5"
+    "@types/node": "npm:20.11.5"
+    "@types/supertest": "npm:2.0.11"
+    class-transformer: "npm:0.5.1"
+    class-validator: "npm:0.14.1"
+    eslint: "npm:8.17.0"
+    jest: "npm:28.1.3"
+    jest-mock: "npm:28.1.3"
+    reflect-metadata: "npm:0.2.1"
+    rimraf: "npm:3.0.2"
+    source-map-support: "npm:0.5.21"
+    standard-version: "npm:9.5.0"
+    ts-jest: "npm:28.0.6"
+    ts-loader: "npm:9.2.8"
+    ts-node: "npm:10.7.0"
+    typescript: "npm:4.6.2"
+  peerDependencies:
+    "@nestjs/common": ">=8.4.4"
+    "@nestjs/core": ">=8.4.4"
+    class-transformer: ">=0.5.1"
+    reflect-metadata: ">=0.1.13"
+    rxjs: ">=7.5.5"
+  languageName: unknown
+  linkType: soft
+
 "@angulartist/utilities@workspace:packages/utilities":
   version: 0.0.0-use.local
   resolution: "@angulartist/utilities@workspace:packages/utilities"
